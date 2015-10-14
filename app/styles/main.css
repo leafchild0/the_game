@@ -1,0 +1,22 @@
+body {
+    background-color: #eee;
+}
+.questsContainer {
+    outline: 1px solid #aaa;
+    width: 550px;
+    height: 50px;
+    background-color: #fff;
+    float: top;
+    margin: 5px;
+}
+
+.questsContainer ul {
+    list-style-type: none;
+    margin: 10px;
+    float: left;
+}
+
+.questsContainer button {
+    float: right;
+    margin: 10px;
+}
