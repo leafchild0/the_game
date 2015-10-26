@@ -1,19 +1,21 @@
-/*global TheGame, Backbone*/
+/*global TheGame, Marionette*/
 
 TheGame.Views = TheGame.Views || {};
 
 (function () {
 	'use strict';
 
-	TheGame.Views.EditQuest = Backbone.View.extend({
+	TheGame.Views.EditQuestView = Marionette.ItemView.extend({
 
 		tagName: 'div',
 
-		id: '',
+		className: 'questDetails',
 
-		className: '',
+		template: _.template($('#questDetailsTemplate').html()),
 
-		events: {},
+		events: {
+			'click .close': 'close'
+		},
 
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
@@ -21,6 +23,13 @@ TheGame.Views = TheGame.Views || {};
 
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
+
+			return this;
+		},
+
+		close: function() {
+			// Delete view
+			this.remove();
 		}
 
 	});

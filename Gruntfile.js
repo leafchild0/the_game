@@ -45,12 +45,6 @@ module.exports = function (grunt) {
                     'test/spec/**/*.js'
                 ]
             },
-            jst: {
-                files: [
-                    '<%= yeoman.app %>/scripts/templates/*.ejs'
-                ],
-                tasks: ['jst']
-            },
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
                 tasks: ['test:true']
@@ -192,10 +186,6 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('createDefaultTemplate', function () {
-        grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
-    });
-
     grunt.registerTask('server', function (target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
         grunt.task.run(['serve' + (target ? ':' + target : '')]);
@@ -209,8 +199,6 @@ module.exports = function (grunt) {
         if (target === 'test') {
             return grunt.task.run([
                 'clean:server',
-                'createDefaultTemplate',
-                'jst',
                 'connect:test',
                 'open:test',
                 'watch'
@@ -219,8 +207,6 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'createDefaultTemplate',
-            'jst',
             'connect:livereload',
             'open:server',
             'watch'
@@ -231,8 +217,6 @@ module.exports = function (grunt) {
         isConnected = Boolean(isConnected);
         var testTasks = [
                 'clean:server',
-                'createDefaultTemplate',
-                'jst',
                 'connect:test',
                 'mocha'
             ];
@@ -248,8 +232,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'createDefaultTemplate',
-        'jst',
         'useminPrepare',
         'imagemin',
         'htmlmin',

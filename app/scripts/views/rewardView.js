@@ -1,11 +1,11 @@
-/*global TheGame, Backbone*/
+/*global TheGame, Marionette*/
 
 TheGame.Views = TheGame.Views || {};
 
 (function () {
     'use strict';
 
-    TheGame.Views.RewardView = Backbone.View.extend({
+    TheGame.Views.RewardView = Marionette.ItemView.extend({
 
 
         tagName: 'div',

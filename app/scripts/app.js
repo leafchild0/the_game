@@ -10,7 +10,13 @@ window.TheGame = {
 
 		var GameManager = new Marionette.Application();
 
-		GameManager.on('start', function () {
+		GameManager.addRegions({
+			header: '#header',
+			main: '#main',
+			footer: '#footer'
+		});
+
+		GameManager.on('initialize:after', function () {
 			if ( Backbone.history ) {
 				Backbone.history.start();
 			}
@@ -29,9 +35,9 @@ $(document).ready(function () {
 	var test = [
 
 		{ name: 'Test', priority: '2' },
-		{ name: 'Test1', description: '2', priority: '1' },
-		{ name: 'Test2', description: '3', priority: '2' },
-		{ name: 'Test3', description: '4', priority: '3' }
+		{ name: 'Getting', description: '2', priority: '1' },
+		{ name: 'Quests', description: '3', priority: '2' },
+		{ name: 'Done', description: '4', priority: '3' }
 	];
 	new TheGame.Views.Main(test);
 

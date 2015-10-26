@@ -1,4 +1,4 @@
-/*global TheGame, Backbone*/
+/*global TheGame, Marionette*/
 
 TheGame.Views = TheGame.Views || {};
 
@@ -6,14 +6,14 @@ TheGame.Views = TheGame.Views || {};
 	'use strict';
 
 	TheGame.Views.Main = Backbone.View.extend({
-            el: '#quests',
+		el: '#quests',
 
 		events: {
-			'click #add': 'addQuest',
-			'click .questContainer': 'showQuestView'
+			'click #add':            'addQuest',
+			'dblclick div.newQuest': 'showQuestView'
 		},
 
-		initialize: function (initialQuests ) {
+		initialize: function ( initialQuests ) {
 			this.collection = new TheGame.Collections.Quests(initialQuests);
 			this.render();
 
@@ -24,25 +24,26 @@ TheGame.Views = TheGame.Views || {};
 
 		render: function () {
 			var that = this;
-			this.collection.each(function (item) {
+			this.collection.each(function ( item ) {
 				that.renderQuest(item);
 			});
 
 			return this;
 		},
 
-		renderQuest: function(quest) {
-			var questsView = new TheGame.Views.QuestView( {model: quest} );
+		renderQuest: function ( quest ) {
+			var questsView = new TheGame.Views.QuestView({ model: quest });
 			this.$el.append(questsView.render().el);
 		},
 
-		addQuest: function ( e ) {
+		addQuest:      function ( e ) {
 
 			e.preventDefault();
 			var $newTitle = $('#name');
 			var titleValue = $newTitle.val();
 
-			if(titleValue !== '') {
+			//TODO: Add a validation + name unique
+			if ( titleValue !== '' ) {
 				//Create a new model
 				var newQuest = new TheGame.Models.Quest({ name: titleValue });
 				//Stab for a DB save
@@ -55,9 +56,26 @@ TheGame.Views = TheGame.Views || {};
 			$newTitle.val('');
 
 		},
+		showQuestView: function ( e ) {
 
-		showQuestView: function(e) {
-			console.log('Clicked ' + e.target.innerHTML);
+			var questModel;
+			// Find clicked target
+			// Get the target quest
+			//Create a new view
+			//Render a new view
+			var target = $(e.target);
+			var questTitle = target.children("ul").children("li").html();
+			if ( !questTitle ) questTitle = target.html();
+
+			//Got the name of the quest
+			//Getting the model
+			if ( questTitle ) {
+				questModel = this.collection.where({ name: questTitle })[ 0 ];
+			}
+
+			//Create a new view
+			var editQuest = new TheGame.Views.EditQuestView({ model: questModel });
+			this.$el.append(editQuest.render().el);
 		}
 
 	});

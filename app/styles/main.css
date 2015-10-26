@@ -1,7 +1,8 @@
 body {
     background-color: #eee;
+    margin: 20px;
 }
-.questsContainer {
+.newQuest {
     outline: 1px solid #aaa;
     width: 550px;
     height: 50px;
@@ -10,13 +11,26 @@ body {
     margin: 5px;
 }
 
-.questsContainer ul {
+.newQuest ul {
     list-style-type: none;
     margin: 10px;
     float: left;
 }
 
-.questsContainer button {
+.newQuest button {
     float: right;
     margin: 10px;
 }
+.questDetails {
+    float: right;
+    margin: 0 1em 0 1em;
+    width: 30%;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+div .quests {
+    position: relative;
+}
+

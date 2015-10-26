@@ -1,15 +1,15 @@
-/*global TheGame, Backbone*/
+/*global TheGame, Marionette*/
 
 TheGame.Views = TheGame.Views || {};
 
 (function () {
 	'use strict';
 
-	TheGame.Views.QuestView = Backbone.View.extend({
+	TheGame.Views.QuestView = Marionette.ItemView.extend({
 
 		tagName: 'div',
 
-		className: 'questsContainer',
+		className: 'newQuest',
 
 		template: _.template($('#questTemplate').html()),
 

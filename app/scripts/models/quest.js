@@ -3,26 +3,27 @@
 TheGame.Models = TheGame.Models || {};
 
 (function () {
-    'use strict';
+	'use strict';
 
-    TheGame.Models.Quest = Backbone.Model.extend({
+	TheGame.Models.Quest = Backbone.Model.extend({
 
-        initialize: function() {
-        },
+		initialize: function () {
+		},
 
-        defaults: {
-		  description: '',
-		  priority: 1
+		defaults: {
+			description: '',
+			priority:    1,
+			comments: ""
 
-        },
+		},
 
-        validate: function(attrs, options) {
-        },
+		validate: function ( attrs, options ) {
+		},
 
-        parse: function(response)  {
-		  response.id = response._id;
-		  return response;
-        }
-    });
+		parse: function ( response ) {
+			response.id = response._id;
+			return response;
+		}
+	});
 
 })();
