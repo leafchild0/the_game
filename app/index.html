@@ -42,11 +42,11 @@
 	<div>
 		<label for="qpriorityEdit">Priority</label>
 		<select id="qpriorityEdit">
-			<option selected='<%= (priority) ? "1" : "" %>'>1</option>
-			<option selected='<%= (priority) ? "2" : "" %>'>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+			<option <%= priority === 0 ? "selected" : void 0%> >no priority</option>
+			<option <%= priority === 1 ? "selected" : void 0%> >1</option>
+			<option <%= priority === 2 ? "selected" : void 0%> >2</option>
+			<option <%= priority === 3 ? "selected" : void 0%> >3</option>
+			<option <%= priority === 4 ? "selected" : void 0%> >4</option>
 		</select>
 	</div>
 	<div>
