@@ -12,7 +12,7 @@ TheGame.Models = TheGame.Models || {};
 
 		defaults: {
 			description: '',
-			priority:    1,
+			priority:    {0: true},
 			comments: ""
 
 		},

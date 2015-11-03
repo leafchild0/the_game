@@ -34,10 +34,10 @@ $(document).ready(function () {
 	//Just a dummy data for now
 	var test = [
 
-		{ name: 'Test', priority: '2' },
-		{ name: 'Getting', description: '2', priority: '1' },
-		{ name: 'Quests', description: '3', priority: '2' },
-		{ name: 'Done', description: '4', priority: '3' }
+		{ name: 'Test', priority: {'2': true} },
+		{ name: 'Getting', description: '2', priority: {'1': true} },
+		{ name: 'Quests', description: '3', priority: {'2': true} },
+		{ name: 'Done', description: '4', priority: {'2': true} }
 	];
 	new TheGame.Views.Main(test);
 
