@@ -14,7 +14,8 @@ TheGame.Views = TheGame.Views || {};
 		template: _.template($('#questDetailsTemplate').html()),
 
 		events: {
-			'click .close': 'close'
+			'click .close': 'close',
+			'click .save':  'saveEdits'
 		},
 
 		initialize: function () {
@@ -27,9 +28,27 @@ TheGame.Views = TheGame.Views || {};
 			return this;
 		},
 
-		close: function() {
+		close: function () {
 			// Delete view
 			this.remove();
+		},
+
+		saveEdits: function () {
+			//  Update the model
+			//Get all the data
+			var name = $('#qnameEdit'),
+				  description = $('#qdescriptionEdit'),
+				  priority = $('#qpriorityEdit');
+
+			this.updateModelData('name', name.val());
+			this.updateModelData('description', description.val());
+			this.updateModelData('priority', priority.val());
+
+			this.close()
+		},
+
+		updateModelData: function ( name, value ) {
+			if ( value !== '' ) this.model.set(name, value);
 		}
 
 	});

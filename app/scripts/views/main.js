@@ -14,6 +14,7 @@ TheGame.Views = TheGame.Views || {};
 		},
 
 		initialize: function ( initialQuests ) {
+
 			this.collection = new TheGame.Collections.Quests(initialQuests);
 			this.render();
 
@@ -39,8 +40,8 @@ TheGame.Views = TheGame.Views || {};
 		addQuest:      function ( e ) {
 
 			e.preventDefault();
-			var $newTitle = $('#name');
-			var titleValue = $newTitle.val();
+			var $newTitle = $('#name'),
+				  titleValue = $newTitle.val();
 
 			//TODO: Add a validation + name unique
 			if ( titleValue !== '' ) {
@@ -58,13 +59,17 @@ TheGame.Views = TheGame.Views || {};
 		},
 		showQuestView: function ( e ) {
 
-			var questModel;
-			// Find clicked target
-			// Get the target quest
-			//Create a new view
-			//Render a new view
-			var target = $(e.target);
-			var questTitle = target.children("ul").children("li").html();
+			var questModel,
+				  target = $(e.target),
+				  questTitle = target.children("ul").children("li").html(),
+				  $detailedView = this.$el.find('.questDetails');
+
+			//Check if detailed view already appended
+			if ( $detailedView.html() ) $detailedView.slideUp("fast", function() {
+				this.remove();
+			});
+
+
 			if ( !questTitle ) questTitle = target.html();
 
 			//Got the name of the quest
@@ -75,7 +80,8 @@ TheGame.Views = TheGame.Views || {};
 
 			//Create a new view
 			var editQuest = new TheGame.Views.EditQuestView({ model: questModel });
-			this.$el.append(editQuest.render().el);
+			//Append newly created view to the dom
+			this.$el.append(editQuest.render().el).end().slideUp("fast");
 		}
 
 	});

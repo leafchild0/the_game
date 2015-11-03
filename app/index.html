@@ -1,87 +1,93 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <title>TheGame</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-        <!-- build:js scripts/vendor/modernizr.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>TheGame</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+	<!-- build:js scripts/vendor/modernizr.js -->
+	<script src="bower_components/modernizr/modernizr.js"></script>
+	<!-- endbuild -->
+</head>
+<body>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+	your browser</a> to improve your experience.</p>
+<![endif]-->
 
-        <div id="quests">
-	        <form id="addQuest" action="#">
-		        <div>
-			        <label for="name">Title: </label><input id="name" type="text" />
-			        <button id="add">Add</button>
-		        </div>
-	        </form>
-	        </div>
+<div id="quests">
+	<form id="addQuest" action="#">
+		<div>
+			<label for="name">Title: </label><input id="name" type="text"/>
+			<button id="add">Add</button>
+		</div>
+	</form>
+</div>
 
-        <div class="footer">
-        </div>
+<div class="footer">
+</div>
 
-        <script id="questDetailsTemplate" type="text/template">
-	        <div class="questDetails">
-	        <div>
-		        <label for="qnameEdit"></label><input id="qnameEdit" value="<%= name %>">
-	        </div>
-	        <div>
-		        <label for="qdescriptionEdit">Description</label>
-			       <textarea id="qdescriptionEdit"><%= description %></textarea>
-	        </div>
-	        <div>
-		        <label for="qpriorityEdit">Priority</label>
-			        <p id="qpriorityEdit"><%= priority %></p>
-	        </div>
-	        <div>
-		        <label for="qcomments">Comments</label>
-		        <!--Please add a for each for comments-->
-			        <textarea id="qcomments"><%= comments %></textarea>
-	        </div>
-	        <button class="close">Close</button>
-	        </div>
+<script id="questDetailsTemplate" type="text/template">
+	<div>
+		<label for="qnameEdit"></label><input id="qnameEdit" value="<%= name %>">
+	</div>
+	<div>
+		<label for="qdescriptionEdit">Description</label>
+		<textarea id="qdescriptionEdit"><%= description %></textarea>
+	</div>
+	<div>
+		<label for="qpriorityEdit">Priority</label>
+		<select id="qpriorityEdit">
+			<option selected='<%= (priority) ? "1" : "" %>'>1</option>
+			<option selected='<%= (priority) ? "2" : "" %>'>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+		</select>
+	</div>
+	<div>
+		<label for="qcomments">Comments</label>
+		<!--Please add a for each for comments-->
+		<textarea id="qcomments"><%= comments %></textarea>
+	</div>
+	<button class="save">Save</button>
+	<button class="close">Close</button>
 
-        </script>
+</script>
 
-        <script id="questTemplate" type="text/template">
-	        <ul>
-		        <li><%= name %></li>
-	        </ul>
-	        <button class="delete">Delete</button>
+<script id="questTemplate" type="text/template">
+	<ul>
+		<li><%= name %></li>
+	</ul>
+	<button class="delete">Delete</button>
 
-        </script>
+</script>
 
-        <!-- build:js scripts/vendor.js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-        <script src="bower_components/backbone/backbone.js"></script>
-        <script src="bower_components/marionette/lib/backbone.marionette.js"></script>
-        <!-- endbuild -->
+<!-- build:js scripts/vendor.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/marionette/lib/backbone.marionette.js"></script>
+<!-- endbuild -->
 
-       <!-- build:js({.tmp,app}) scripts/app.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/models/quest.js"></script>
-        <script src="scripts/models/reward.js"></script>
-        <script src="scripts/collections/rewards.js"></script>
-        <script src="scripts/collections/quests.js"></script>
-        <script src="scripts/views/main.js"></script>
-        <script src="scripts/views/editReward.js"></script>
-        <script src="scripts/views/editQuest.js"></script>
-        <script src="scripts/views/questView.js"></script>
-        <script src="scripts/views/rewardView.js"></script>
-        <script src="scripts/routes/questsRouter.js"></script>
-        <script src="scripts/routes/rewardsRouter.js"></script>
-        <!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/app.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/models/quest.js"></script>
+<script src="scripts/models/reward.js"></script>
+<script src="scripts/collections/rewards.js"></script>
+<script src="scripts/collections/quests.js"></script>
+<script src="scripts/views/main.js"></script>
+<script src="scripts/views/editReward.js"></script>
+<script src="scripts/views/editQuest.js"></script>
+<script src="scripts/views/questView.js"></script>
+<script src="scripts/views/rewardView.js"></script>
+<script src="scripts/routes/questsRouter.js"></script>
+<script src="scripts/routes/rewardsRouter.js"></script>
+<!-- endbuild -->
 
 </body>
 </html>
