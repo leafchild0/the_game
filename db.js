@@ -16,7 +16,7 @@ db.once('open', function () {
 });
 
 var Reward = new mongoose.Schema({
-	title: String,
+	name: String,
 	description: String,
 	priority: Number,
 	tags: [{tag:String}],
@@ -25,18 +25,23 @@ var Reward = new mongoose.Schema({
 
 });
 
+var Comments = new mongoose.Schema({
+	body: String,
+	date: {type: Date, default: Date.now}
+});
 //Schemas
 var Quest = new mongoose.Schema({
-	title: String,
+	name: String,
 	description: String,
 	priority: Number,
-	subtasks: [{name: String}],
+	subtasks: [],
 	tags: [{tag: String}],
-	comments : [{comment: String, date: Date}],
+	comments : [ Comments ],
 	date: { type: Date, default: Date.now },
 	rewards: [ Reward ]
 
 });
+
 
 //Models
 var QuestModel = mongoose.model( 'Quest', Quest );

@@ -8,7 +8,7 @@ TheGame.Collections = TheGame.Collections || {};
 	TheGame.Collections.Rewards = Backbone.Collection.extend({
 
 		model: TheGame.Models.Reward,
-		url:   '/rewards'
+		url:   'api/rewards'
 
 	});
 

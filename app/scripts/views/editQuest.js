@@ -14,18 +14,25 @@ TheGame.Views = TheGame.Views || {};
 		template: _.template($('#questDetailsTemplate').html()),
 
 		events: {
-			'click .close': 'close',
-			'click .save':  'saveEdits'
+			'click .close':      'close',
+			'click .save':       'saveEdits',
+			'click .commentAdd': 'postComment'
+
 		},
 
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'destroy', this.remove);
 		},
 
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
-
 			return this;
+		},
+
+		parse: function ( response ) {
+			response.id = response._id;
+			return response;
 		},
 
 		close: function () {
@@ -34,21 +41,39 @@ TheGame.Views = TheGame.Views || {};
 		},
 
 		saveEdits: function () {
-			//  Update the model
+			//Update the model
 			//Get all the data
-			var name = $('#qnameEdit'),
-				  description = $('#qdescriptionEdit'),
-				  priority = $('#qpriorityEdit');
+			var comment    = $('#qcomments').val(),
+			    attributes = {};
 
-			this.updateModelData('name', name.val());
-			this.updateModelData('description', description.val());
-			this.updateModelData('priority', priority.val());
+			attributes[ 'name' ] = $('#qnameEdit').val();
+			attributes[ 'description' ] = $('#qdescriptionEdit').val();
+			attributes[ 'priority' ] = Number.parseInt($('#qpriorityEdit').val()) || 0;
 
-			this.close()
+			if ( comment !== "" ) {
+				//Update in model
+				attributes[ 'comments' ] = comment;
+				attributes[ 'isComment' ] = true;
+			} else {
+				attributes[ 'isComment' ] = false;
+			}
+			this.updateModelData(attributes);
+
 		},
 
-		updateModelData: function ( name, value ) {
-			if ( value !== '' ) this.model.set(name, value);
+		postComment: function() {
+			this.saveEdits();
+		},
+
+		updateModelData: function ( values ) {
+			var that = this;
+			Object.keys(values).forEach(function ( key ) {
+				var value = values[ key ];
+				// iteration code
+				if ( value !== '' ) that.model.set(key, value);
+			});
+			this.model.save();
+
 		}
 
 	});

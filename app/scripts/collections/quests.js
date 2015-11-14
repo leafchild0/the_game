@@ -8,7 +8,7 @@ TheGame.Collections = TheGame.Collections || {};
 	TheGame.Collections.Quests = Backbone.Collection.extend({
 
 		model: TheGame.Models.Quest,
-		url: '/quests'
+		url: 'api/quests'
 
 	});
 

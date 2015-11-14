@@ -16,7 +16,9 @@
 <body>
 <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-	your browser</a> to improve your experience.</p>
+                                                                                                                    your
+                                                                                                                    browser</a>
+                       to improve your experience.</p>
 <![endif]-->
 
 <div id="quests">
@@ -42,17 +44,26 @@
 	<div>
 		<label for="qpriorityEdit">Priority</label>
 		<select id="qpriorityEdit">
-			<option <%= priority === 0 ? "selected" : void 0%> >no priority</option>
-			<option <%= priority === 1 ? "selected" : void 0%> >1</option>
-			<option <%= priority === 2 ? "selected" : void 0%> >2</option>
-			<option <%= priority === 3 ? "selected" : void 0%> >3</option>
-			<option <%= priority === 4 ? "selected" : void 0%> >4</option>
+			<option
+			<%= priority === 0 ? "selected" : void 0%> >no priority</option>
+			<option
+			<%= priority === 1 ? "selected" : void 0%> >1</option>
+			<option
+			<%= priority === 2 ? "selected" : void 0%> >2</option>
+			<option
+			<%= priority === 3 ? "selected" : void 0%> >3</option>
+			<option
+			<%= priority === 4 ? "selected" : void 0%> >4</option>
 		</select>
 	</div>
 	<div>
-		<label for="qcomments">Comments</label>
+		<% if (comments[0]) {%><p class="commentsHeader">Comments</p><% }%>
+		<% _.each(comments, function(comment) { %>
+		<p class="postedComment"><%= comment.body %></p>
+		<% }); %>
 		<!--Please add a for each for comments-->
-		<textarea id="qcomments"><%= comments %></textarea>
+		<textarea id="qcomments" title="Comments" placeholder="Post a comment"></textarea>
+		<button class="commentAdd">Post</button>
 	</div>
 	<button class="save">Save</button>
 	<button class="close">Close</button>

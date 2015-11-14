@@ -16,6 +16,7 @@ TheGame.Views = TheGame.Views || {};
 		initialize: function ( initialQuests ) {
 
 			this.collection = new TheGame.Collections.Quests(initialQuests);
+			this.collection.fetch();
 			this.render();
 
 			//this.listenTo(this.collection, 'change', this.render);
@@ -37,7 +38,7 @@ TheGame.Views = TheGame.Views || {};
 			this.$el.append(questsView.render().el);
 		},
 
-		addQuest:      function ( e ) {
+		addQuest: function ( e ) {
 
 			e.preventDefault();
 			var $newTitle = $('#name'),
@@ -47,10 +48,11 @@ TheGame.Views = TheGame.Views || {};
 			if ( titleValue !== '' ) {
 				//Create a new model
 				var newQuest = new TheGame.Models.Quest({ name: titleValue });
+
 				//Stab for a DB save
-				//this.collection.create({ name: $newTitle });
+				this.collection.create(newQuest);
 				//Otherwise
-				this.renderQuest(newQuest);
+				//this.collection.add(newQuest);
 			}
 
 			// Clear input field value
@@ -65,7 +67,7 @@ TheGame.Views = TheGame.Views || {};
 				  $detailedView = this.$el.find('.questDetails');
 
 			//Check if detailed view already appended
-			if ( $detailedView.html() ) $detailedView.slideUp("fast", function() {
+			if ( $detailedView.html() ) $detailedView.slideUp("fast", function () {
 				this.remove();
 			});
 

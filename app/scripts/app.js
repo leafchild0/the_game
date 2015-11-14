@@ -31,14 +31,14 @@ $(document).ready(function () {
 	'use strict';
 	TheGame.init();
 
-	//Just a dummy data for now
+	/*//Just a dummy data for now
 	var test = [
 
 		{ name: 'Test', priority: 0 },
 		{ name: 'Getting', description: '2', priority: 1 },
 		{ name: 'Quests', description: '3', priority: 2 },
 		{ name: 'Done', description: '4', priority: 4 }
-	];
-	new TheGame.Views.Main(test);
+	];*/
+	new TheGame.Views.Main();
 
 });

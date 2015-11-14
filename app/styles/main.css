@@ -23,14 +23,26 @@ body {
 }
 .questDetails {
     float: right;
-    margin: 0 1em 0 1em;
+    margin: 10px 1em 0 1em;
     width: 30%;
+    height: 100%;
     position: absolute;
     top: 20px;
     right: 10px;
+    background-color: #8699a4;
+    border: 1px;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-div .quests {
+.questDetails div {
+    padding: 5px;
+}
+
+div.quests {
     position: relative;
 }
 
+textarea#qcomments {
+    margin-top: 20px;
+}
