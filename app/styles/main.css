@@ -8,7 +8,7 @@ body {
     height: 50px;
     background-color: #fff;
     float: top;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .newQuest ul {
@@ -27,7 +27,7 @@ body {
     width: 30%;
     height: 100%;
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 10px;
     background-color: #8699a4;
     border: 1px;
@@ -44,5 +44,18 @@ div.quests {
 }
 
 textarea#qcomments {
-    margin-top: 20px;
+    margin: 10px;
+}
+
+form button {
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+input#name {
+    width: 300px;
+}
+
+div#questreward {
+    margin-left: 20px;
 }

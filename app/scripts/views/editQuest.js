@@ -14,9 +14,9 @@ TheGame.Views = TheGame.Views || {};
 		template: _.template($('#questDetailsTemplate').html()),
 
 		events: {
-			'click .close':      'close',
-			'click .save':       'saveEdits',
-			'click .commentAdd': 'postComment'
+			'click #close':      'close',
+			'click #save':       'saveEdits',
+			'click #commentAdd': 'postComment'
 
 		},
 
