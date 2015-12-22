@@ -2,90 +2,108 @@
 
 TheGame.Views = TheGame.Views || {};
 
-(function () {
+(function() {
 	'use strict';
 
-	TheGame.Views.Main = Backbone.View.extend({
+	TheGame.Views.Main = Backbone.View.extend( {
 		el: '#quests',
 
 		events: {
-			'click #add':            'addQuest',
-			'dblclick div.newQuest': 'showQuestView'
+			'click #add':                   'addQuest',
+			'dblclick div.newQuest':        'showQuestView',
+			'change div#questreward input': 'displayByType',
+			"keyup #searchTask":            "performSearch"
 		},
 
-		initialize: function ( initialQuests ) {
+		initialize: function( initialQuests ) {
 
-			this.collection = new TheGame.Collections.Quests(initialQuests);
+			this.collection = new TheGame.Collections.Quests( initialQuests );
+			//this.listenTo(this.collection, 'change', this.render);
+			this.listenTo( this.collection, 'reset', this.render );
+			this.listenTo( this.collection, 'add', this.renderQuest );
+
 			this.collection.fetch();
 			this.render();
 
-			//this.listenTo(this.collection, 'change', this.render);
-			this.listenTo(this.collection, 'reset', this.render);
-			this.listenTo(this.collection, 'add', this.renderQuest);
 		},
 
-		render: function () {
+		render: function( tasks ) {
+
+			//cleanup
+			//will not be fired at the first time
+			$( 'div.newQuest' ).remove();
+
 			var that = this;
-			this.collection.each(function ( item ) {
-				that.renderQuest(item);
-			});
+			var tasksToRender = tasks || this.collection.returnByType( 'quest' ) || this.collection;
+			tasksToRender.each( function( item ) {
+				that.renderQuest( item );
+			} );
 
 			return this;
 		},
 
-		renderQuest: function ( quest ) {
-			var questsView = new TheGame.Views.QuestView({ model: quest });
-			this.$el.append(questsView.render().el);
+		renderQuest: function( quest ) {
+			var questsView = new TheGame.Views.QuestView( { model: quest } );
+			this.$el.append( questsView.render().el );
+
 		},
 
-		addQuest: function ( e ) {
 
+		addQuest: function( e ) {
 			e.preventDefault();
-			var $newTitle = $('#name'),
-				  titleValue = $newTitle.val();
+			var $newTitle = $( '#name' ),
+				  titleValue = $newTitle.val(),
+				  itemType = $( 'div#questreward input:checked' ).attr( 'id' ), newItem;
 
 			//TODO: Add a validation + name unique
-			if ( titleValue !== '' ) {
+			if( titleValue !== '' ) {
 				//Create a new model
-				var newQuest = new TheGame.Models.Quest({ name: titleValue });
+				newItem = new TheGame.Models.Quest( { name: titleValue, type: itemType || 'quest' } );
 
-				//Stab for a DB save
-				this.collection.create(newQuest);
-				//Otherwise
-				//this.collection.add(newQuest);
+				this.collection.create( newItem );
 			}
 
 			// Clear input field value
-			$newTitle.val('');
+			$newTitle.val( '' );
 
 		},
-		showQuestView: function ( e ) {
+
+		showQuestView: function( e ) {
 
 			var questModel,
-				  target = $(e.target),
-				  questTitle = target.children("ul").children("li").html(),
-				  $detailedView = this.$el.find('.questDetails');
+				  target = $( e.target ),
+				  questTitle = target.find( " ul > li" ).justText(),
+				  $detailedView = this.$el.find( '.questDetails' );
 
 			//Check if detailed view already appended
-			if ( $detailedView.html() ) $detailedView.slideUp("fast", function () {
+			if( $detailedView.html() ) $detailedView.slideUp( "fast", function() {
 				this.remove();
-			});
-
-
-			if ( !questTitle ) questTitle = target.html();
+			} );
 
 			//Got the name of the quest
 			//Getting the model
-			if ( questTitle ) {
-				questModel = this.collection.where({ name: questTitle })[ 0 ];
+			if( questTitle ) {
+				questModel = this.collection.findWhere( { name: questTitle } );
 			}
 
-			//Create a new view
-			var editQuest = new TheGame.Views.EditQuestView({ model: questModel });
-			//Append newly created view to the dom
-			this.$el.append(editQuest.render().el).end().slideUp("fast");
-		}
+			if( questModel ) {
+				//Create a new view
+				var editQuest = new TheGame.Views.EditQuestView( { model: questModel } );
+				//Append newly created view to the dom
+				this.$el.append( editQuest.render().el ).end().slideUp( "fast" );
+			}
+		},
 
-	});
+		displayByType: function( e ) {
+			var type = $( 'div#questreward input:checked' ).attr( 'id' );
+			this.render( this.collection.returnByType( type ) );
+		},
+
+		performSearch: function( e ) {
+			var letters = $( "#searchTask" ).val();
+			this.render( this.collection.search( letters ) );
+		},
+
+	} );
 
 })();

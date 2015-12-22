@@ -7,41 +7,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<script src="bower_components/modernizr/modernizr.js"></script>
 	<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>to improve your experience.</p>
 <![endif]-->
 
 
 <div class="container">
-<div id="quests" class="row row-header">
-	<form id="addQuest" class="form-inline" action="#">
-		<div class="form-group">
-			<div class="input-group">
+	<div id="quests" class="jumbotron">
+		<form id="addQuest" class="form-inline row col-sm-10" action="#">
+			<div class="form-group">
+				<div class="input-group">
+					<label class="control-label">
+						<input id="name" class="form-control" type="text" placeholder="Add new item"/>
+					</label>
+					<button class="btn btn-default" id="add">Add</button>
+				</div>
+			</div>
+			<div id="questreward" class="form-group">
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary active">
+						<input id="quest" type="radio" name="section" checked>Quest
+					</label>
+					<label class="btn btn-warning">
+						<input id="reward" type="radio" name="section">Reward
+					</label>
+				</div>
 				<label class="control-label">
-					<input id="name" class="form-control" type="text" placeholder="Add a new"/>
-				</label>
-				<button class="btn btn-default" id="add">Add</button>
-			</div>
-		</div>
-		<div id="questreward" class="form-group">
-			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary active">
-					<input type="radio" name="section" checked>Quest
-				</label>
-				<label class="btn btn-warning">
-					<input type="radio" name="section">Reward
+					<input id="searchTask" class="form-control" type="text" placeholder="Search"/>
 				</label>
 			</div>
-		</div>
-	</form>
-</div>
-</div>
-
-<div class="footer">
+		</form>
+	</div>
 </div>
 
 <script id="questDetailsTemplate" type="text/template">
@@ -73,7 +74,7 @@
 		<p class="postedComment"><%= comment.body %></p>
 		<% }); %>
 		<!--Please add a for each for comments-->
-		<textarea rows="5" id="qcomments" title="Comments" placeholder="Post a comment"></textarea>
+		<textarea rows="2" id="qcomments" title="Comments" placeholder="Post a comment"></textarea>
 		<button id="commentAdd" class="btn btn-primary">Post</button>
 	</div>
 	<button id="save" class="btn btn-primary">Save</button>
@@ -83,7 +84,7 @@
 
 <script id="questTemplate" type="text/template">
 	<ul>
-		<li><%= name %></li>
+		<li><span id="questType" class="label label-info fa"><%= type %></span> <%= name %></li>
 	</ul>
 	<button class="delete btn btn-danger">Delete</button>
 
@@ -100,16 +101,12 @@
 <!-- build:js({.tmp,app}) scripts/app.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/models/quest.js"></script>
-<script src="scripts/models/reward.js"></script>
-<script src="scripts/collections/rewards.js"></script>
 <script src="scripts/collections/quests.js"></script>
 <script src="scripts/views/main.js"></script>
-<script src="scripts/views/editReward.js"></script>
 <script src="scripts/views/editQuest.js"></script>
 <script src="scripts/views/questView.js"></script>
-<script src="scripts/views/rewardView.js"></script>
 <script src="scripts/routes/questsRouter.js"></script>
-<script src="scripts/routes/rewardsRouter.js"></script>
+<script src="scripts/utils.js"></script>
 <!-- endbuild -->
 
 </body>

@@ -15,16 +15,6 @@ db.once('open', function () {
 	console.log("Connected to project database");
 });
 
-var Reward = new mongoose.Schema({
-	name: String,
-	description: String,
-	priority: Number,
-	tags: [{tag:String}],
-	comments : [{comment: String, date: Date}],
-	date: { type: Date, default: Date.now }
-
-});
-
 var Comments = new mongoose.Schema({
 	body: String,
 	date: {type: Date, default: Date.now}
@@ -32,16 +22,16 @@ var Comments = new mongoose.Schema({
 //Schemas
 var Quest = new mongoose.Schema({
 	name: String,
+	type: String,
 	description: String,
 	priority: Number,
 	subtasks: [],
 	tags: [{tag: String}],
 	comments : [ Comments ],
 	date: { type: Date, default: Date.now },
-	rewards: [ Reward ]
+	reward: String
 
 });
-
 
 //Models
 var QuestModel = mongoose.model( 'Quest', Quest );

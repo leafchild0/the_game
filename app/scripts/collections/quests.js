@@ -8,7 +8,22 @@ TheGame.Collections = TheGame.Collections || {};
 	TheGame.Collections.Quests = Backbone.Collection.extend({
 
 		model: TheGame.Models.Quest,
-		url: 'api/quests'
+		url: 'api/quests',
+
+		returnByType : function(type){
+			return _(this.filter(function(data) {
+				return data.get('type') == type;
+			}));
+		},
+
+		search : function(letters){
+			if(letters == "") return this;
+
+			var pattern = new RegExp(letters,"gi");
+			return _(this.filter(function(data) {
+				return pattern.test(data.get("name"));
+			}));
+		}
 
 	});
 

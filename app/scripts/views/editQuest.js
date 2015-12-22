@@ -5,7 +5,7 @@ TheGame.Views = TheGame.Views || {};
 (function () {
 	'use strict';
 
-	TheGame.Views.EditQuestView = Marionette.ItemView.extend({
+	TheGame.Views.EditQuestView = Backbone.View.extend({
 
 		tagName: 'div',
 
@@ -22,7 +22,7 @@ TheGame.Views = TheGame.Views || {};
 
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
-			this.listenTo(this.model, 'destroy', this.remove);
+			this.listenTo(this.model, 'destroy', this.close);
 		},
 
 		render: function () {
