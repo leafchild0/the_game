@@ -8,8 +8,7 @@ TheGame.Views = TheGame.Views || {};
 	TheGame.Views.EditQuestView = Backbone.View.extend({
 
 		tagName: 'div',
-
-		className: 'questDetails',
+		className: 'questDetails row col-sm-4',
 
 		template: _.template($('#questDetailsTemplate').html()),
 

@@ -13,13 +13,16 @@
 </head>
 <body>
 <!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                                                                                                                    your
+                                                                                                                    browser</a>to
+                       improve your experience.</p>
 <![endif]-->
 
 
-<div class="container">
-	<div id="quests" class="jumbotron">
-		<form id="addQuest" class="form-inline row col-sm-10" action="#">
+<div id="mainContainer" class="container-fluid">
+	<div id="quests" class="row col-sm-8">
+		<form id="addQuest" class="form-inline" action="#">
 			<div class="form-group">
 				<div class="input-group">
 					<label class="control-label">
@@ -46,14 +49,14 @@
 </div>
 
 <script id="questDetailsTemplate" type="text/template">
-	<div>
-		<label for="qnameEdit"></label><input id="qnameEdit" value="<%= name %>">
+	<div class="input-group">
+		<label for="qnameEdit">Title</label><input class="form-control" id="qnameEdit" value="<%= name %>">
 	</div>
-	<div>
+	<div class="input-group">
 		<label for="qdescriptionEdit">Description</label>
-		<textarea id="qdescriptionEdit" rows="3"><%= description %></textarea>
+		<textarea class="form-control" id="qdescriptionEdit" rows="3"><%= description %></textarea>
 	</div>
-	<div>
+	<div class="input-group">
 		<label for="qpriorityEdit">Priority</label>
 		<select id="qpriorityEdit">
 			<option
@@ -68,17 +71,19 @@
 			<%= priority === 4 ? "selected" : void 0%> >4</option>
 		</select>
 	</div>
-	<div>
+	<div class="input-group">
 		<% if (comments[0]) {%><p class="commentsHeader">Comments</p><% }%>
 		<% _.each(comments, function(comment) { %>
 		<p class="postedComment"><%= comment.body %></p>
 		<% }); %>
 		<!--Please add a for each for comments-->
-		<textarea rows="2" id="qcomments" title="Comments" placeholder="Post a comment"></textarea>
+		<textarea class="form-control" rows="2" id="qcomments" title="Comments" placeholder="Post a comment"></textarea>
 		<button id="commentAdd" class="btn btn-primary">Post</button>
 	</div>
-	<button id="save" class="btn btn-primary">Save</button>
-	<button id="close" class="btn btn-primary">Close</button>
+	<div id="edit-control" class="button-group">
+		<button id="save" class="btn btn-primary">Save</button>
+		<button id="close" class="btn btn-primary">Close</button>
+	</div>
 
 </script>
 

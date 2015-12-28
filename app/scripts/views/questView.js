@@ -9,7 +9,7 @@ TheGame.Views = TheGame.Views || {};
 
 		tagName: 'div',
 
-		className: 'newQuest row col-sm-8',
+		className: 'newQuest row',
 
 		template: _.template($('#questTemplate').html()),
 

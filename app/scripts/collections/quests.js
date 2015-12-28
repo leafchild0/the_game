@@ -16,12 +16,12 @@ TheGame.Collections = TheGame.Collections || {};
 			}));
 		},
 
-		search : function(letters){
+		search : function(type, letters){
 			if(letters == "") return this;
 
 			var pattern = new RegExp(letters,"gi");
 			return _(this.filter(function(data) {
-				return pattern.test(data.get("name"));
+				return data.get('type') === type && pattern.test(data.get("name"));
 			}));
 		}
 

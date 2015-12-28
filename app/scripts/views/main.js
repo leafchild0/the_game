@@ -16,14 +16,16 @@ TheGame.Views = TheGame.Views || {};
 		},
 
 		initialize: function( initialQuests ) {
-
+			var self = this;
 			this.collection = new TheGame.Collections.Quests( initialQuests );
 			//this.listenTo(this.collection, 'change', this.render);
 			this.listenTo( this.collection, 'reset', this.render );
 			this.listenTo( this.collection, 'add', this.renderQuest );
 
-			this.collection.fetch();
-			this.render();
+			this.collection.fetch(function() {
+				self.render();
+			});
+
 
 		},
 
@@ -34,7 +36,8 @@ TheGame.Views = TheGame.Views || {};
 			$( 'div.newQuest' ).remove();
 
 			var that = this;
-			var tasksToRender = tasks || this.collection.returnByType( 'quest' ) || this.collection;
+			var tasksToRender = tasks || this.collection.returnByType( 'quest' );
+			console.log(tasksToRender);
 			tasksToRender.each( function( item ) {
 				that.renderQuest( item );
 			} );
@@ -47,7 +50,6 @@ TheGame.Views = TheGame.Views || {};
 			this.$el.append( questsView.render().el );
 
 		},
-
 
 		addQuest: function( e ) {
 			e.preventDefault();
@@ -73,12 +75,10 @@ TheGame.Views = TheGame.Views || {};
 			var questModel,
 				  target = $( e.target ),
 				  questTitle = target.find( " ul > li" ).justText(),
-				  $detailedView = this.$el.find( '.questDetails' );
+				  $detailedView = $( '.questDetails' );
 
 			//Check if detailed view already appended
-			if( $detailedView.html() ) $detailedView.slideUp( "fast", function() {
-				this.remove();
-			} );
+			if( $detailedView.html() ) $detailedView.remove();
 
 			//Got the name of the quest
 			//Getting the model
@@ -90,7 +90,7 @@ TheGame.Views = TheGame.Views || {};
 				//Create a new view
 				var editQuest = new TheGame.Views.EditQuestView( { model: questModel } );
 				//Append newly created view to the dom
-				this.$el.append( editQuest.render().el ).end().slideUp( "fast" );
+				$('#mainContainer').append( editQuest.render().el ).end().slideUp( "fast" );
 			}
 		},
 
@@ -100,9 +100,11 @@ TheGame.Views = TheGame.Views || {};
 		},
 
 		performSearch: function( e ) {
-			var letters = $( "#searchTask" ).val();
-			this.render( this.collection.search( letters ) );
-		},
+			var letters = $( "#searchTask" ).val(),
+				  type = $( 'div#questreward input:checked' ).attr( 'id' );
+			if(letters === '') this.render(this.collection.returnByType( type ));
+			else this.render( this.collection.search( type, letters ) );
+		}
 
 	} );
 

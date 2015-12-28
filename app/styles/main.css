@@ -3,9 +3,6 @@ body {
     margin: 20px;
 }
 
-div.container {
-    margin-left: 50px;
-}
 div.newQuest {
     outline: 1px solid #aaa;
     height: 50px;
@@ -25,29 +22,23 @@ div.newQuest button {
     float: right;
     margin: 10px;
 }
-.questDetails {
+div.questDetails {
     float: right;
-    margin: 10px 1em 0 1em;
-    width: 30%;
-    height: 70%;
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background-color: #8699a4;
     border: 1px;
     border-radius: 10px;
     padding: 10px;
+    height: 95vh;
 }
 
 .questDetails div {
     padding: 5px;
 }
-
-div.quests {
-    position: relative;
+.questDetails label {
+    margin: 5px;
 }
-
-#qcomments {
+button#commentAdd {
+    float: right;
     margin: 10px;
 }
 
@@ -75,4 +66,9 @@ div#questreward {
 input#searchTask {
     margin-left: 5px;
     width: auto;
+}
+
+#edit-control {
+    position: absolute;
+    bottom: 10px;
 }
