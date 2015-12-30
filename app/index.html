@@ -68,6 +68,14 @@
 			<option>4</option>
 		</select>
 	</div>
+	<% if (type === 'quest') {%>
+	<div class="input-group">
+		<label for="rewardLink">Reward</label>
+		<select id="rewardLink">
+			<option></option>
+		</select>
+	</div>
+	<% }; %>
 	<div class="input-group">
 		<% if (comments[0]) {%><p class="commentsHeader">Comments</p><% }%>
 		<% _.each(comments, function(comment) { %>

@@ -37,7 +37,6 @@ TheGame.Views = TheGame.Views || {};
 
 			var that = this;
 			var tasksToRender = tasks || this.collection.returnByType( 'quest' );
-			console.log(tasksToRender);
 			tasksToRender.each( function( item ) {
 				that.renderQuest( item );
 			} );
@@ -89,6 +88,7 @@ TheGame.Views = TheGame.Views || {};
 			if( questModel ) {
 				//Create a new view
 				var editQuest = new TheGame.Views.EditQuestView( { model: questModel } );
+				editQuest.rewards = this.collection.returnByType('reward');
 				//Append newly created view to the dom
 				$('#mainContainer').append( editQuest.render().el ).end().slideUp( "fast" );
 			}

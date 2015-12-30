@@ -28,11 +28,35 @@ TheGame.Views = TheGame.Views || {};
 
 			this.$el.html( this.template( this.model.toJSON() ) );
 			//Populate priority
-			this.$el.find( 'option' )
-				  .get(Number.parseInt(this.model
-						.get( 'priority' )) ).selected = true;
+			this.addPriority();
+			//Populate rewards
+			this.linkRewards();
 
 			return this;
+		},
+
+		linkRewards: function() {
+
+			var self = this;
+			//Find needed element with options
+			var rewardLink = this.$el.find( '#rewardLink' );
+			//Get all rewards in the system
+			//Collect names and add options with them
+			this.rewards.forEach( function( reward ) {
+				var regardName = reward.get( 'name' );
+				rewardLink.append( $( "<option></option>" )
+					  .val( regardName ).html( regardName )
+					  .attr( 'selected', function() {
+
+					return self.model.get( 'reward' ) == regardName;
+				} ) );
+			} );
+		},
+
+		addPriority: function() {
+			this.$el.find( '#qpriorityEdit' ).children()
+				  .get( Number.parseInt( this.model
+						.get( 'priority' ) ) ).selected = true;
 		},
 
 		parse: function( response ) {
@@ -53,6 +77,7 @@ TheGame.Views = TheGame.Views || {};
 
 			attributes['name'] = $( '#qnameEdit' ).val();
 			attributes['description'] = $( '#qdescriptionEdit' ).val();
+			attributes['reward'] = $( '#rewardLink').find('option:selected' ).val();
 			attributes['priority'] = Number.parseInt( $( '#qpriorityEdit' ).val() ) || 0;
 
 			if( comment !== "" ) {
