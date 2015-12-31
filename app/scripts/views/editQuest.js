@@ -44,11 +44,11 @@ TheGame.Views = TheGame.Views || {};
 			//Collect names and add options with them
 			this.rewards.forEach( function( reward ) {
 				var regardName = reward.get( 'name' );
-				rewardLink.append( $( "<option></option>" )
+				rewardLink.append( $( '<option></option>' )
 					  .val( regardName ).html( regardName )
 					  .attr( 'selected', function() {
 
-					return self.model.get( 'reward' ) == regardName;
+					return self.model.get( 'reward' ) === regardName;
 				} ) );
 			} );
 		},
@@ -75,18 +75,18 @@ TheGame.Views = TheGame.Views || {};
 			var comment = $( '#qcomments' ).val(),
 				  attributes = {};
 
-			attributes['name'] = $( '#qnameEdit' ).val();
-			attributes['description'] = $( '#qdescriptionEdit' ).val();
-			attributes['reward'] = $( '#rewardLink').find('option:selected' ).val();
-			attributes['priority'] = Number.parseInt( $( '#qpriorityEdit' ).val() ) || 0;
+			attributes.name = $( '#qnameEdit' ).val();
+			attributes.description = $( '#qdescriptionEdit' ).val();
+			attributes.reward = $( '#rewardLink').find('option:selected' ).val();
+			attributes.priority = Number.parseInt( $( '#qpriorityEdit' ).val() ) || 0;
 
-			if( comment !== "" ) {
+			if( comment !== '' ) {
 				//Update in model
-				attributes['comments'] = comment;
-				attributes['isComment'] = true;
+				attributes.comment = comment;
+				attributes.isComment = true;
 			}
 			else {
-				attributes['isComment'] = false;
+				attributes.isComment = false;
 			}
 			this.updateModelData( attributes );
 

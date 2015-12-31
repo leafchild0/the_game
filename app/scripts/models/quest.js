@@ -13,12 +13,11 @@ TheGame.Models = TheGame.Models || {};
 		defaults: {
 			description: '',
 			priority: 0,
-			comments: ""
+			comments: ''
 
 		},
 
-		validate: function ( attrs, options ) {
-		},
+		validate: function ( attrs, options ) {},
 
 		parse: function ( response ) {
 			response.id = response._id;

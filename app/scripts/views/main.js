@@ -12,7 +12,7 @@ TheGame.Views = TheGame.Views || {};
 			'click #add':                   'addQuest',
 			'dblclick div.newQuest':        'showQuestView',
 			'change div#questreward input': 'displayByType',
-			"keyup #searchTask":            "performSearch"
+			'keyup #searchTask':            'performSearch'
 		},
 
 		initialize: function( initialQuests ) {
@@ -73,7 +73,7 @@ TheGame.Views = TheGame.Views || {};
 
 			var questModel,
 				  target = $( e.target ),
-				  questTitle = target.find( " ul > li" ).justText(),
+				  questTitle = target.find( ' ul > li' ).justText(),
 				  $detailedView = $( '.questDetails' );
 
 			//Check if detailed view already appended
@@ -90,17 +90,17 @@ TheGame.Views = TheGame.Views || {};
 				var editQuest = new TheGame.Views.EditQuestView( { model: questModel } );
 				editQuest.rewards = this.collection.returnByType('reward');
 				//Append newly created view to the dom
-				$('#mainContainer').append( editQuest.render().el ).end().slideUp( "fast" );
+				$('#mainContainer').append( editQuest.render().el ).end().slideUp( 'fast' );
 			}
 		},
 
-		displayByType: function( e ) {
+		displayByType: function() {
 			var type = $( 'div#questreward input:checked' ).attr( 'id' );
 			this.render( this.collection.returnByType( type ) );
 		},
 
-		performSearch: function( e ) {
-			var letters = $( "#searchTask" ).val(),
+		performSearch: function() {
+			var letters = $( '#searchTask' ).val(),
 				  type = $( 'div#questreward input:checked' ).attr( 'id' );
 			if(letters === '') this.render(this.collection.returnByType( type ));
 			else this.render( this.collection.search( type, letters ) );

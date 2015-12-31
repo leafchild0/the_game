@@ -4,6 +4,8 @@
  * Time: 11:11
  */
 
+'use strict';
+
 jQuery.fn.justText = function() {
 
 	return $(this)  .clone()

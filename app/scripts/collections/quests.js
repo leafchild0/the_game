@@ -12,16 +12,16 @@ TheGame.Collections = TheGame.Collections || {};
 
 		returnByType : function(type){
 			return _(this.filter(function(data) {
-				return data.get('type') == type;
+				return data.get('type') === type;
 			}));
 		},
 
 		search : function(type, letters){
-			if(letters == "") return this;
+			if(letters === '') { return this; }
 
-			var pattern = new RegExp(letters,"gi");
+			var pattern = new RegExp(letters,'gi');
 			return _(this.filter(function(data) {
-				return data.get('type') === type && pattern.test(data.get("name"));
+				return data.get('type') === type && pattern.test(data.get('name'));
 			}));
 		}
 
