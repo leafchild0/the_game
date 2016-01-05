@@ -19,7 +19,7 @@ app.configure( function() {
 //perform route lookup based on URL and HTTP method
 	app.use( app.router );
 //Where to serve static content
-	app.use( express.static( path.join( application_root, 'app' ) ) );
+	app.use( express.static( path.join( application_root, '../app' ) ) );
 //Show all errors in development
 	app.use( express.errorHandler( { dumpExceptions: true, showStack: true } ) );
 } );
